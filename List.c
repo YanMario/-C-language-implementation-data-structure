@@ -29,24 +29,33 @@ Node* BuyNode()
     return pnode;
 }
 
-
-void Insert_Head(int data,List plist)
+//头插
+bool Insert_Head(int data,List plist)
 {
     if(NULL == plist)
-        return;
+        printf("ok");
     Node* pnewNode = BuyNode();
     pnewNode -> _data = data;
     pnewNode -> _pnext = plist -> _pnext;
     plist -> _pnext = pnewNode;
-}
-
-
-
-bool Inser_tail(List plist, int data)
-{
     return true;
 }
 
+//尾插
+bool Inser_tail(List plist, int data)
+{
+    Node* pnewNode = BuyNode();
+    Node* pNode = plist;
+    while(pNode -> _pnext != NULL)
+    {
+        pNode = pNode -> _pnext;
+    }
+    pNode -> _pnext = pnewNode;
+    pnewNode -> _pnext = NULL;
+    return true;
+}
+
+//找到data所在的节点
 Node* Search(List plist,int data)
 {
     Node *pNode = plist;
@@ -106,35 +115,6 @@ void show(List plist)
     }
 }
 
-/*
-bool resver_List(List plist)
-{
-    if(!plist){
-        printf("ok");
-        return false;}
-    printf("ok");
-    Node *pNode = plist -> _pnext;
-    Node *qNode = plist;
-    while(qNode -> _pnext != NULL)
-    {
-        qNode = qNode -> _pnext;
-    }
-    plist -> _pnext = qNode;
-    while(pNode -> _pnext != qNode)
-    {
-        pNode = pNode -> _pnext;
-        pNode -> _pnext = qNode -> _pnext;
-        qNode -> _pnext = pNode;
-    }
-    printf("ok\n");
-    return true;
-}*/
-
-
-
-
-
-
 //链表逆置
 void Resver(List plist,Node *cur)
 {
@@ -183,8 +163,7 @@ int main()
     plist = BuyNode();
     if(plist == NULL)
         printf("头节点内存申请失败");
-    //Init_List(plist);
-    plist -> _pnext = NULL;
+    Init_List(plist);
     Insert_Head(10,plist);
     Insert_Head(9,plist);
     Insert_Head(8,plist);
@@ -197,6 +176,7 @@ int main()
     Insert_Head(1,plist);
     Delete(plist,5);
     Delete(plist,1);
+    Inser_tail(plist,1);
     Resver_List_digui(plist);
     show(plist);
     return 0;
