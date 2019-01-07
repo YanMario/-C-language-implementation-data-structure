@@ -33,7 +33,7 @@ Node* BuyNode()
 bool Insert_Head(int data,List plist)
 {
     if(NULL == plist)
-        printf("ok");
+        return false;
     Node* pnewNode = BuyNode();
     pnewNode -> _data = data;
     pnewNode -> _pnext = plist -> _pnext;
